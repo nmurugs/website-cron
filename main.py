@@ -24,7 +24,7 @@ if latest_eo not in history:
     
     # 4. Analyze with AI
     response = client.models.generate_content(
-        model="gemini-2.0-flash", 
+        model="gemini-1.5-flash", 
         contents=f"Summarize this executive order title: {latest_eo}"
     )
     print(f"AI Summary: {response.text}")
