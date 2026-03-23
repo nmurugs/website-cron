@@ -1,33 +1,31 @@
 name: EO Monitor Agent
 on:
   schedule:
-    - cron: '*/15 * * * *'  # Runs every 15 minutes
-  workflow_dispatch:       # Adds a "Run now" button for testing
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
 
 jobs:
   run-monitor:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4  # Using @v4 to stay safe
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+          cache: 'pip' # This helps GitHub "remember" your libraries
 
-       
-
-      
-      - name: Install and Run Agent
+      - name: Install and Run
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 groq
+          python -m pip install requests beautifulsoup4 groq
           python main.py
 
-      - name: Save memory (Commit changes)
+      - name: Save memory
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
