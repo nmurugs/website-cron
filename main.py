@@ -7,7 +7,7 @@ from urllib.parse import urljoin  # The "Glue" for links
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 # 1. Base URL
-base_url = "https://www.whitehouse.gov/executive-orders/"
+base_url = "https://www.moneycontrol.com/"
 response = requests.get(base_url)
 soup = BeautifulSoup(response.text, 'html.parser')
 
